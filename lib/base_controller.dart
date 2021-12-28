@@ -1,9 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:gogoboom_flutter_common/gogoboom_flutter_common.dart';
 
-import 'gogoboom_flutter_getx_start.dart';
 import 'models/page_params.dart';
 import 'widget/base_loading.dart';
 
@@ -21,6 +19,9 @@ abstract class BaseController<T> extends SuperController<T> {
   bool supportPagination = false;
 
   bool isLastPage = false;
+
+  ///是否正在加载中
+  bool isFetching = false;
 
   ///展示的空信息
   String? emptyMsg;
@@ -50,7 +51,7 @@ abstract class BaseController<T> extends SuperController<T> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/ic_placeholder_error.png',
+                  'assets/images/ic_placeholder_empty.png',
                   width: 200,
                 ),
                 const SizedBox(
@@ -80,6 +81,7 @@ abstract class BaseController<T> extends SuperController<T> {
     pageParams ??= PageParams.init();
     pageParams?.page = 1;
     isLastPage = false;
+    isFetching = true;
     try {
       if (needLoading) {
         change(null, status: RxStatus.loading());
@@ -101,23 +103,27 @@ abstract class BaseController<T> extends SuperController<T> {
     } finally {
       refreshController.refreshCompleted();
       refreshController.loadComplete();
+      isFetching = false;
     }
   }
 
   ///下一页
-  Future<Void?> onLoadMore() async {
+  Future<void> onLoadMore({bool append = true}) async {
     pageParams?.next();
+    isFetching = true;
     try {
       change(state, status: RxStatus.loadingMore());
       final newValue = await requestFunc();
       if (newValue is List) {
-        if (newValue.length == 0) {
+        if (newValue.length < 20) {
           isLastPage = true;
           refreshController.loadNoData();
-        } else {
-          (state as List?)!.addAll(newValue);
-          refreshController.loadComplete();
         }
+        if (!append) {
+          (state as List?)?.clear();
+        }
+        (state as List?)!.addAll(newValue);
+        refreshController.loadComplete();
       } else {
         logger.w('不支持的分页类型');
       }
@@ -126,6 +132,8 @@ abstract class BaseController<T> extends SuperController<T> {
     } catch (e) {
       logger.e('加载更多失败了...「$e」');
       refreshController.loadNoData();
+    } finally {
+      isFetching = false;
     }
   }
 
