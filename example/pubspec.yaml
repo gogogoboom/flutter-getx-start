@@ -4,6 +4,7 @@ description: Demonstrates how to use the gogoboom_flutter_getx_start plugin.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 0.0.1+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -17,6 +18,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   gogoboom_flutter_getx_start:
     # When depending on this package from a real application you should use:
@@ -25,7 +28,7 @@ dependencies:
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.
     path: ../
-
+  json_serializable: ^6.1.3
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -34,6 +37,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  build_runner: ^2.1.7
+  retrofit_generator: ^3.0.0+2
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
