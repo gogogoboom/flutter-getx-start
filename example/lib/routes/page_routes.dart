@@ -34,7 +34,6 @@ class PageRoutes {
       binding: IndexBinding(),
     ),
     GetPage(
-      transition: Transition.fadeIn,
       name: setup,
       page: () => const SetupPage(),
       binding: SetupBinding(),

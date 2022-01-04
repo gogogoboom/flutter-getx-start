@@ -1,7 +1,7 @@
 name: gogoboom_flutter_getx_start
 description: A new Flutter project.
 version: 0.0.1
-homepage:
+homepage: https://github.com/gogogoboom/flutter-getx-start
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -10,12 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  gogoboom_flutter_common:
-    git:
-      url: git@github.com:gogogoboom/flutter-common.git
-      ref: main
 #  gogoboom_flutter_common:
-#    path: ../flutter-common
+#    git:
+#      url: git@github.com:gogogoboom/flutter-common.git
+#      ref: main
+  gogoboom_flutter_common:
+    path: ../flutter-common
   #高性能轻量状态管理框架
   get: ^4.6.1
   #轻量内存磁盘读写框架
@@ -26,8 +26,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
 
+  build_runner: ^2.1.7
+  retrofit_generator: ^3.0.0+2
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
