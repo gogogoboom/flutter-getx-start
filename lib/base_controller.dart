@@ -96,6 +96,7 @@ abstract class BaseController<T> extends SuperController<T> {
         }
         onDataLoaded();
       }, onError: (err) {
+        logger.e('出错了...「$err」');
         change(state, status: RxStatus.error(err.toString()));
       });
     } catch (e) {
