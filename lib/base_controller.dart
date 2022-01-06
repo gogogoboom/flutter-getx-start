@@ -92,7 +92,7 @@ abstract class BaseController<T> extends SuperController<T> {
           change(newValue,
               status: newValue.isEmpty ? RxStatus.empty() : RxStatus.success());
         } else {
-          change(newValue, status: RxStatus.success());
+          change(newValue,  status: newValue == null ? RxStatus.empty() : RxStatus.success());
         }
         onDataLoaded();
       }, onError: (err) {
