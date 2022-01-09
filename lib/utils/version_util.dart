@@ -24,11 +24,13 @@ class EiaVersion {
     const String r = 'R$rVersion';
     const String s = 'S$sVersion';
     const String d = 'D$dVersion';
+    // final String platformVersion =
+    //     'Version: $locale${f}_$platform${packageInfo.version}_${r}_${s}_$d';
     final String platformVersion =
-        '版本号: $locale${f}_$platform${packageInfo.version}_${r}_${s}_$d';
+        '$locale${f}_${platform}_${packageInfo.version}';
     final String version = '$locale${f}_${packageInfo.version}_${r}_${s}_$d';
     logger.i('当前版本：「$version」');
-    return platformVersion;
+    return platformVersion.toUpperCase();
   }
 }
 
