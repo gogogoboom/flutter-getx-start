@@ -10,12 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-#  gogoboom_flutter_common:
-#    git:
-#      url: git@github.com:gogogoboom/flutter-common.git
-#      ref: main
   gogoboom_flutter_common:
-    path: ../flutter-common
+    git:
+      url: https://github.com/gogogoboom/flutter-common.git
+      ref: main
+#  gogoboom_flutter_common:
+#    path: ../flutter-common
   #高性能轻量状态管理框架
   get: ^4.6.1
   #轻量内存磁盘读写框架
